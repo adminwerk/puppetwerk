@@ -1,5 +1,11 @@
 # [SERVER]
 
+# Description:
+# This is how "stages" can work. It is a node.pp file taking the
+# stages definition - starting with the keyword "stage". Inside 
+# the node {} the class(es) are called within the defined stage.
+
+
 stage {"one-after-main": require => Stage['main']}
 stage {"two-after-main": require => Stage['one-after-main']}
 stage {"three-after-main": require => Stage['two-after-main']}
