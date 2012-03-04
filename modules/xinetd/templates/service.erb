@@ -1,0 +1,25 @@
+# maintained by Puppet!
+#
+#  author: chris@adminwerk.de
+# version: 1.0.1
+#    date: 26.02.2012
+#
+
+service <%= service_name %> 
+{
+	flags = <%= flags %>
+	disable	= <%= disable %>
+	socket_type = <%= socket_type %>
+	port = <%= port %>
+	wait = <%= wait %>
+	user = <%= user %>
+	group = <%= group %>
+	server = <%= server %>
+
+<% if protocol != :undef %> protocol = <%= protocol %><% end %>
+<% if server_args != :undef %> server_args = <%= server_args %><% end %>
+<% if per_source != :undef %> per_source = <%= per_source %><% end %>
+<% if log_on_failure != :undef %> log_on_failure += <%= log_on_failure %><% end %>
+<% if only_from != :undef %> only_from = <%= only_from %><% end %>
+
+}

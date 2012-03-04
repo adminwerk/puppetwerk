@@ -1,0 +1,16 @@
+# DO NOT EDIT!  FILE MAINTAINED BY PUPPET
+# ==============================================
+
+[main]
+logdir=<%= logdir %>
+vardir=<%= vardir %>
+ssldir=<%= ssldir %>
+rundir=<%= rundir %>
+
+factpath=$vardir/lib/facter
+templatedir=$confdir/templates
+
+
+[agent]
+	report=<%= report %>
+	server=<%= server %>

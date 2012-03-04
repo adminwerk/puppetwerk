@@ -1,0 +1,22 @@
+# This file is maintained by puppet
+# DO NOT TOUCH as this file might simply been overwritten at some point
+
+[ndb_mgmd]
+hostname=<%= hostname %>
+datadir=<%= datadir %>/ndb_data
+NodeId=1
+
+[ndbd default]
+noofreplicas=2
+datadir=<%= datadir %>/ndb_data
+
+[ndbd]
+hostname=<%= hostname %>
+NodeId=3
+
+[ndbd]
+hostname=<%= hostname %>
+NodeId=4
+
+[mysqld]
+NodeId=50

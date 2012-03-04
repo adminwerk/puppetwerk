@@ -1,0 +1,27 @@
+# DO NOT EDIT! MAINTAINED BY PUPPET
+
+global_defs {
+	notification_email {
+		<%= notification_email %>
+	}
+	notification_email_from <%= notification_email_from %>
+	smtp_server <%= smtp_server %>
+	smtp_connect_timeout <%= smtp_connect_timeout %>
+	router_id LVS_DEVEL
+}
+
+vrrp_instance VI_1 {
+	state MASTER
+	interface eth0
+	virtual_router_id 51
+	priority <%= priority %>
+	advert_int 1
+	authentication {
+		auth_type PASS
+		auth_pass <%= auth_pass %>
+	}
+
+	virtual_ipaddress {
+		<%= virtual_ipaddress %>
+	}
+}

@@ -1,0 +1,19 @@
+# This file is maintained by puppet
+# DO NOT EDIT DIRECTLY
+
+127.0.0.1 	localhost.localdomain	<%= my_host_name %>
+<%= ip_internet %>	<%= fqdn %>	<%= hostname %>
+
+<%= intlan %>.11 	lb01.<%= our_domain %>	lb01
+<%= intlan %>.12 	lb02.<%= our_domain %> 	lb02
+<%= intlan %>.13 	cen01.<%= our_domain %>	cen01 puppet
+<%= intlan %>.14  	ws01.<%= our_domain %> 	ws01
+<%= intlan %>.15 	db01.<%= our_domain %> 	db01
+
+
+# The following lines are desirable for IPv6 capable hosts
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
