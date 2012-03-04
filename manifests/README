@@ -1,2 +1,13 @@
-Inside this directory a node folder including all the nodes*.pp files is required for this to work.
-It might contain sensible data, hence not included in this git repository.
+Inside this directory a node folder including all the "nodes/*.pp" files is required to make it work. It might contain sensible data, hence not included in this git repository.
+
+A typical node looks like this:
+
+node "server.domain.tld" {
+
+	$sensible_info = "it-could-go-here"
+	$sensible_info2 = "and-here-too"
+
+	include class1,
+		class2,
+		class...,
+}
