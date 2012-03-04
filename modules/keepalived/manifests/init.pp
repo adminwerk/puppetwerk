@@ -41,9 +41,43 @@ class keepalived {
 				target => "/usr/local/etc/sysconfig/keepalived";
 	}
 
+	# create a new onfiguration file for this daemon
+	keepalived::conf { "usr/local/etc/keepalived/keepalived.conf": }
+
 	# service installieren
 	service { "keepalived": 
 		enable => true,
 	}
 
 }
+
+
+define keepalived::conf (
+		
+		notification_email = "${notification_email}",
+		notification_email_from = "${notification_email_from}",
+		smtp_server = "${smtp_server}",
+		smtp_connect_timeout = "30",
+
+		priority = "${hostname_priority}",
+		auth_pass = "${auth_pass}",
+		virtual_ipaddress = "${virtual_ipaddress}" ) {
+
+	file { "/usr/local/etc/keepalived/keepalived.conf":
+		owner => "root",
+		group => "root",
+		mode => "644",
+		content => template("/etc/puppet/modules/keepalived/templates/keepalived.erb"),
+		notify => Service['keepalived'],
+	}
+}
+
+
+
+
+
+
+
+
+
+
