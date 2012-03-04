@@ -1,8 +1,8 @@
 #
 #  define: create_mysql_db
 #  author: chris@adminwerk.de
-# version: 1.0.0
-#    date: 28.02.2012
+# version: 1.0.1
+#    date: 04.03.2012
 #
 #   descr: creates a database with access rights (localhost) for the provided user $user
 #          and his password $password and the databasename $name
@@ -27,6 +27,6 @@ define mysql_cluster::db ( $user, $password ) {
 	exec { "create-${name}-db":
 		unless => "${basedir}/bin/mysql -u${user} -p${password} ${name}",
 		command => "${basedir}/bin/mysql -u${user} -p${password} -e \"CREATE DATABASE ${name}; GRANT all on ${name}.* TO ${user}@localhost IDENTIFIED by '$password'; FLUSH PRIVILEGES;\"",
-		require => Service['mysql-cluster'],
+		require => Service['mysqld'],
 	}
 } 
