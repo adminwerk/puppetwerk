@@ -1,5 +1,4 @@
-WHAT IS THIS?
-=============
+= WHAT IS THIS?
 
 A collection of puppet modules, manifests and templates. However without the required files to make it run.
 I use this in a test scenario for learning about puppet and stuff around.
