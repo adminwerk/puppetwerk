@@ -34,8 +34,10 @@ class keepalived {
 				ensure => symlink,
 				target => "/usr/local/etc/keepalived";
 		   "/etc/init.d/keepalived":
-				ensure => symlink,
-				target => "/usr/local/etc/rc.d/init.d/keepalived";  
+				owner => "root",
+				group => "root",
+				mode => "755",
+				source => "puppet:///data/keepalived/init/keepalived";  
 			"/etc/default/keepalived":
 				ensure => symlink,
 				target => "/usr/local/etc/sysconfig/keepalived";
@@ -61,7 +63,9 @@ define keepalived::conf (
 
 		priority = "${hostname_priority}",
 		auth_pass = "${auth_pass}",
-		virtual_ipaddress = "${virtual_ipaddress}" ) {
+		virtual_ipaddress = "${virtual_ipaddress}",
+		ka_param= "${ka_param}", 
+		eth="${eth}" ) {
 
 	file { "/usr/local/etc/keepalived/keepalived.conf":
 		owner => "root",
