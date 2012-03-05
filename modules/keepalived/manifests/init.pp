@@ -1,10 +1,10 @@
 #
 #   class:
 #  author: chris@adminwerk.de
-# version: 1.0.0
-#    date: 03.03.2012
+# version: 1.0.1
+#    date: 05.03.2012
 #
-#    info:
+#    info: installs 'keepalived' from source, creates symlinks and adds a init script
 #
 
 class keepalived {
@@ -45,6 +45,19 @@ class keepalived {
 
 	# create a new onfiguration file for this daemon
 	keepalived::conf { "usr/local/etc/keepalived/keepalived.conf": }
+
+	# allow the application to bind to non local addresses
+	# and call 'sysctl -p' after
+	append_if_no_such_line { "add-sysctl-nonlocal-bind":
+		file => "/etc/sysctl.conf",
+		line => "net.ipv4.ip_nonlocal_bind = 1",
+		notify => Exec['sysctl-p'],
+	}
+
+	exec { "sysctl-p":
+		command => "/sbin/sysctl -p",
+		refreshonly => true,
+	}
 
 	# service installieren
 	service { "keepalived": 
