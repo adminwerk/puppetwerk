@@ -19,7 +19,7 @@ define apt::key ( $url="" ) {
         }
         default: {
             exec { "aptkey_add_${name}":
-                command => "wget -O - ${url} | apt-key add -",
+                command => "wget --no-proxy -O - ${url} | apt-key add -",
                 unless  => "apt-key list | grep -q ${name}",
             }
         }

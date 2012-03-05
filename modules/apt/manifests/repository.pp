@@ -62,7 +62,7 @@ define apt::repository (
             }
             default: {
                 exec { "aptkey_add_${key}":
-                    command => "wget -O - ${key_url} | apt-key add -",
+                    command => "wget --no-proxy -O - ${key_url} | apt-key add -",
                     unless  => "apt-key list | grep -q ${key}",
                 }
             }
