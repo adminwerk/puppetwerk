@@ -2,7 +2,8 @@
 
 global_defs {
 	notification_email {
-		! This is the e-mailaddress where notifications are bounced to
+		!
+		! this is the e-mailaddress where notifications are bounced to
 		<%= notification_email %>
 	}
 	notification_email_from <%= notification_email_from %>
@@ -11,18 +12,26 @@ global_defs {
 	router_id LVS_DEVEL
 }
 
+!
+! Describes the moveable IP for each instance
 vrrp_instance VI_1 {
-	state MASTER
-	interface eth0
+
+	state <%= state %>
+	interface <%= eth %>
+	!
+	! arbitary unique number 0..255
 	virtual_router_id 51
 	priority <%= priority %>
 	advert_int 1
+
 	authentication {
 		auth_type PASS
 		auth_pass <%= auth_pass %>
 	}
 
 	virtual_ipaddress {
-		<%= virtual_ipaddress %>
+		!
+		! delivered via puppet global variables
+		<%= virtual_ipaddress %> <%= ka_param %> <%= eth %>
 	}
 }
