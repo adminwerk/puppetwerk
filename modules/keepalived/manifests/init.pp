@@ -41,9 +41,6 @@ class keepalived {
 				target => "/usr/local/etc/sysconfig/keepalived";
 	}
 
-	# create a new configuration file for this daemon
-	keepalived::conf { "usr/local/etc/keepalived/keepalived.conf": }
-
 	# allow the application to bind to non local addresses
 	# and call 'sysctl -p' after
 	append_if_no_such_line { "add-sysctl-nonlocal-bind":
@@ -63,36 +60,4 @@ class keepalived {
 	}
 
 }
-
-
-define keepalived::conf (
-		
-		notification_email = "${notification_email}",
-		notification_email_from = "${notification_email_from}",
-		smtp_server = "${smtp_server}",
-		smtp_connect_timeout = "30",
-
-		priority = "${hostname_priority}",
-		auth_pass = "${auth_pass}",
-		virtual_ipaddress = "${virtual_ipaddress}",
-		ka_param= "${ka_param}", 
-		eth="${eth}" ) {
-
-	file { "/usr/local/etc/keepalived/keepalived.conf":
-		owner => "root",
-		group => "root",
-		mode => "644",
-		content => template("/etc/puppet/modules/keepalived/templates/keepalived.erb"),
-		notify => Service['keepalived'],
-	}
-}
-
-
-
-
-
-
-
-
-
 
