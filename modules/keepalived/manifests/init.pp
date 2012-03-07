@@ -1,16 +1,14 @@
 #
-#   class:
+#   class: keepalived
 #  author: chris@adminwerk.de
-# version: 1.0.1
-#    date: 05.03.2012
+# version: 1.0.2
+#    date: 06.03.2012
 #
-#    info: installs 'keepalived' from source, creates symlinks and adds a init script
+#    info: installs 'keepalived' from source, 
+#          creates symlinks and adds an init script
 #
 
 class keepalived {
-
-
-	notify { "linux-headers-$kernelrelease to be present ": }
 
 	package { 
 		[ "linux-headers-$kernelrelease",
@@ -20,7 +18,7 @@ class keepalived {
 			ensure => "present";
 	}
 
-	# bilding from source
+	# building from source
 	exec { "build-keepalived-latest":
 		cwd => "/tmp",
 		command => "/usr/bin/wget ${download_url} -O /tmp/keepalived-${version}.tgz && /bin/tar xvzf keepalived-${version}.tgz && cd keepalived-${version} && ./configure --with-kernel-dir=/lib/modules/$kernelrelease/build && make && make install",
@@ -29,7 +27,7 @@ class keepalived {
 		timeout => 0,
 	}
 
-	# create symlink to the right position(s)
+	# create symlinks and files required
 	file { "/etc/keepalived":
 				ensure => symlink,
 				target => "/usr/local/etc/keepalived";
@@ -43,7 +41,7 @@ class keepalived {
 				target => "/usr/local/etc/sysconfig/keepalived";
 	}
 
-	# create a new onfiguration file for this daemon
+	# create a new configuration file for this daemon
 	keepalived::conf { "usr/local/etc/keepalived/keepalived.conf": }
 
 	# allow the application to bind to non local addresses
@@ -59,7 +57,7 @@ class keepalived {
 		refreshonly => true,
 	}
 
-	# service installieren
+	# install service
 	service { "keepalived": 
 		enable => true,
 	}

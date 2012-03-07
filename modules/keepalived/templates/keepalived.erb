@@ -1,5 +1,7 @@
 ! DO NOT EDIT! MAINTAINED BY PUPPET
 
+!
+! global definitions like who to notify if need be, etc.
 global_defs {
 	notification_email {
 		!
@@ -11,6 +13,14 @@ global_defs {
 	smtp_connect_timeout <%= smtp_connect_timeout %>
 	router_id LVS_DEVEL
 }
+
+!
+!
+!vrrp_script chk_http_port {
+!	script "/usr/bin/killall -0 nginx"
+!	interval 2
+!	weight 2
+!}
 
 !
 ! Describes the moveable IP for each instance
@@ -29,9 +39,17 @@ vrrp_instance VI_1 {
 		auth_pass <%= auth_pass %>
 	}
 
+!	track_script {
+!		chk_http_port
+!	}
+
 	virtual_ipaddress {
 		!
 		! delivered via puppet global variables
 		<%= virtual_ipaddress %> <%= ka_param %> <%= eth %>
 	}
 }
+
+!
+! Virtual server definitions synopsis
+!virtual_server 
