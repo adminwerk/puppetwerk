@@ -1,1 +1,16 @@
 # MAINTAINED BY PUPPET
+
+## [PROXY CACHING OPTIONS]
+proxy_buffering <%= nginx_proxy_buffering %>;
+proxy_cache_min_uses <%= nginx_proxy_cache_min_uses %>;
+proxy_cache_path <%= nginx_proxy_cache_path %>;
+proxy_cache_valid <%= nginx_proxy_cache_valid %>;
+proxy_ignore_client_abort <%= nginx_proxy_ignore_client_abort %>;
+proxy_intercept_errors <%= nginx_proxy_intercept_errors %>;
+proxy_next_upstream <%= nginx_proxy_next_upstream %>;
+
+proxy_redirect <%= nginx_proxy_redirect %>;
+proxy_set_header <%= nginx_proxy_set_header %>;
+proxy_connect_timeout <%= nginx_proxy_connect_timeout %>;
+proxy_send_timeout <%= nginx_proxy_send_timeout %>;
+proxy_read_timeout <%= nginx_proxy_read_timeout %>;
