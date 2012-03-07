@@ -1,11 +1,17 @@
 #
-#   class: ntp
+#   class: nginx
 #  author: chris@adminwerk.de
-# version: 1.0.0
-#    date: 25.02.2012
+# version: 1.0.2
+#    date: 07.03.2012
 #
+
 class nginx {
 
-	service { "nginx": ensure => running,}	
+	require nginx::install
+	require nginx::setup
+
+	service { "nginx": 
+		ensure => running,
+	}	
 
 }

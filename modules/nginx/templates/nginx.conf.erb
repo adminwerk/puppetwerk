@@ -1,0 +1,30 @@
+# MAINTAINED BY PUPPET
+
+# [GLOBALS]
+
+user <%= nginx_user %>;
+worker_processes <%= nginx_worker_processes %>;
+pid <%= nginx_pid %>;
+
+# [EVENTS]
+
+events {
+	worker_connections <%= nginx_worker_connections %>;
+}
+
+# [HTTP]
+
+http {
+	
+	default_type	application/octet-stream;
+
+	# common options
+	include conf.d/options.conf;
+
+	# proxy settings
+	include conf.d/proxy.conf;
+
+	# domains
+	include conf.d/domains.conf;
+
+}
