@@ -1,0 +1,54 @@
+# MAINTAINED BY PUPPET
+
+## Connect to backend servers via LAN ##
+## Reverse Proxy Load Balancer Logic ##
+upstream <%= upstream %>  {
+      server <%= server_1_ip %> weight=10 max_fails=3 fail_timeout=30s;
+      server <%= server_2_ip %> weight=10 max_fails=3 fail_timeout=30s;
+      # only comes alive when above two fails
+      server <%= server_3_ip %> weight=1 backup;
+}
+ 
+server {
+	listen <%= vhost_port %>;
+    server_name <%= siteName %>;
+
+    access_log /var/log/nginx/<%= siteName %>_access.log main;
+    error_log /var/log/nginx/<%= siteName %>_error.log;
+    index <%= vhost_index %>;
+    root /var/www/<%= siteName %>;
+ 
+    ## Only requests to our Host are allowed
+    if ($host !~ ^(<%= siteName %>|www.<%= siteName %>|\*.<%= siteName %>)$ ) {
+         return 444;
+    }
+ 
+    ## redirect www to nowww
+    # if ($host = 'www.<%= siteName %>' ) {
+    #    rewrite  ^/(.*)$  http://<%= siteName %>/$1  permanent;
+    # }
+ 
+    ## Only allow these request methods
+    if ($request_method !~ ^(GET|HEAD|POST)$ ) {
+         return 444;
+    }
+ 
+    ## PROXY - Web
+    location / {
+        proxy_pass http://<%= upstream %>;
+        proxy_cache <%= vhost_proxy_cache %>;
+        proxy_cache_valid <%= vhost_proxy_cache_valid %>;
+        proxy_cache_use_stale  error timeout invalid_header updating http_500 http_502 http_503 http_504;
+        proxy_ignore_headers   Expires Cache-Control;
+ 
+        proxy_set_header  Host            $host;
+        proxy_set_header  X-Real-IP       $remote_addr;
+        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+ 
+    # redirect server error pages to the static page /50x.html
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+}
