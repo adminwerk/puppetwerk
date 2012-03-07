@@ -57,6 +57,7 @@ class keepalived {
 	# install service
 	service { "keepalived": 
 		enable => true,
+		hasrestart => true,
 	}
 
 }

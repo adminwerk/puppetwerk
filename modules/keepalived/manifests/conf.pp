@@ -1,8 +1,8 @@
 #
 #  define: keepalived::conf
 #  author: chris@adminwerk.de
-# version: 1.0.2
-#    date: 06.03.2012
+# version: 1.0.3
+#    date: 07.03.2012
 #
 #    info: configures the most vital elements for the 'keepalived' daemon  
 #   usage:
