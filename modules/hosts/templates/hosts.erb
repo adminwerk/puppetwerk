@@ -1,5 +1,4 @@
-# This file is maintained by puppet
-# DO NOT EDIT DIRECTLY
+# MAINTAINED BY PUPPET
 
 127.0.0.1 	localhost.localdomain	<%= my_host_name %>
 <%= ip_internet %>	<%= fqdn %>	<%= hostname %>
@@ -9,6 +8,10 @@
 <%= intlan %>.13 	cen01.<%= our_domain %>	cen01 puppet
 <%= intlan %>.14  	ws01.<%= our_domain %> 	ws01
 <%= intlan %>.15 	db01.<%= our_domain %> 	db01
+
+# internal repository available via fake domain 'internal'
+<%= intlan %>.13	packages.internal
+<%= intlan %>.13	apt.internal
 
 
 # The following lines are desirable for IPv6 capable hosts
