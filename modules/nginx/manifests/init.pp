@@ -8,7 +8,6 @@
 class nginx {
 
 	require nginx::install
-	require nginx::setup
 
 	service { "nginx": 
 		ensure => running,
