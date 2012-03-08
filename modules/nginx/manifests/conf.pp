@@ -25,6 +25,7 @@ define nginx::conf (
 	include nginx
 
 	file {
+
 		"/etc/nginx/nginx.conf":
 			owner => "root",
 			group => "root",
