@@ -13,3 +13,5 @@ import "/etc/puppet/variables/global.pp"
 
 # set default $PATH for all exec
 Exec { path => [ "/bin/", "/sbin/" , "/usr/bin/", "/usr/sbin/" ] }
+
+node default { }
