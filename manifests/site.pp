@@ -1,8 +1,8 @@
 #
 #    name: site.pp
 #  author: chris@adminwerk.de
-# version: 1.0.6
-#    date: 24.03.2012
+# version: 1.0.7
+#    date: 08.03.2012
 #
 
 import "classes/*.pp"
