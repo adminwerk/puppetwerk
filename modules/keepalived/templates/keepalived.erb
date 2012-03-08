@@ -16,11 +16,11 @@ global_defs {
 
 !
 !
-!vrrp_script chk_http_port {
-!	script "/usr/bin/killall -0 nginx"
-!	interval 2
-!	weight 2
-!}
+vrrp_script chk_http_port {
+	script "/usr/bin/killall -0 nginx"
+	interval 2
+	weight 2
+}
 
 !
 ! Describes the moveable IP for each instance
@@ -39,9 +39,9 @@ vrrp_instance VI_1 {
 		auth_pass <%= auth_pass %>
 	}
 
-!	track_script {
-!		chk_http_port
-!	}
+	track_script {
+		chk_http_port
+	}
 
 	virtual_ipaddress {
 		!
