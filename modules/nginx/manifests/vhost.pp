@@ -9,7 +9,7 @@
 #
 
 class nginx::vhost {
-	
+
 	define site (
 		$siteName = $title,
 		$vhost_port,
@@ -29,12 +29,6 @@ class nginx::vhost {
 			mode => 644,
 			content => template("nginx/vhost.erb");
 		
-		"/var/www":
-			ensure => "directory",
-			owner => "www-data",
-			group => "www-data",
-			mode => 770;
-
 		"/var/www/$title":
 			ensure => present,
 			owner => "www-data",
