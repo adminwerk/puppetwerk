@@ -1,4 +1,4 @@
-# puppet-sudo
+# sudo
 
 Manage sudo configuration via Puppet
 
