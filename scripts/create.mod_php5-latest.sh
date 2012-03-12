@@ -207,7 +207,6 @@ fi
         --with-config-file-path=$PREFIX/etc \
         --with-config-file-scan-dir=$PREFIX/etc/conf.d/ \
         --with-pear=$PREFIX/pear \
-#        --with-libdir=/usr/lib \
         --with-apxs2=$APXS2 \
         --enable-bcmath \
         --enable-calendar \
@@ -266,8 +265,8 @@ fi
 $MAKE
 
 if [ "$CHECK" = "yes" ] ; then
-        $CHECKINSTALL -D --pkgname="mod_php5-apache2.2" --pakdir=$PAKDIR --maintainer=$MAINTAINER --delspec $MAKE install
-        echo "Creating debian file and install it"
+        $CHECKINSTALL -D --pkgname="mod-php5-apache2.2" --pakdir=$PAKDIR --maintainer=$MAINTAINER --delspec "$MAKE install"
+        echo "creating DEB package 'mod-php5-apache2.2' and install it"
 fi
 
 if [ "$CHECK" = "no" ]; then
