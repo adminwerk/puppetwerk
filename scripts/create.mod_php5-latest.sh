@@ -25,6 +25,8 @@ VERSION=5.3.10
 SRCDIR=/usr/local/src/
 USRDIR=/usr/local
 PREFIX=$USRDIR/$PACKAGE
+ETC=/etc
+SCANDIR=$ETC/conf.d
 
 # PECL versions
 MEMCACHE_V=""
@@ -202,8 +204,8 @@ fi
 # -------------------------------------------------------------------------
 ./configure --prefix=$PREFIX \
         --bindir=$BINDIR \
-        --with-config-file-path=$PREFIX/etc \
-        --with-config-file-scan-dir=$PREFIX/etc/conf.d/ \
+        --with-config-file-path=$ETC \
+        --with-config-file-scan-dir=$SCANDIR \
         --with-pear=$PREFIX/pear \
         --with-apxs2=$APXS2 \
         --enable-bcmath \
