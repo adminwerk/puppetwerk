@@ -23,22 +23,23 @@
 PACKAGE=php
 VERSION=5.3.10
 SRCDIR=/usr/local/src/
-PREFIX=/usr/local/$PACKAGE
+USRDIR=/usr/local
+PREFIX=$USRDIR/$PACKAGE
 
 # PECL versions
-MEMCACHE_V=
-MEMCACHED_V=
-APC_V=
-HTTP_V=
-JSON_V=
-GEOIP_V=
-IMAGICK_V=
-YAML_V=
-TIDY_V=
+MEMCACHE_V=""
+MEMCACHED_V=""
+APC_V=""
+HTTP_V=""
+JSON_V=""
+GEOIP_V=""
+IMAGICK_V=""
+YAML_V=""
+TIDY_V=""
 SUHOSIN_V="0.9.33"
 MEMTRACK_V="0.2.1"
-XDEBUG_V=
-ZIP_V=
+XDEBUG_V=""
+ZIP_V=""
 PDFLIB_V="7.0.5"
 PDFLIB_RDIR="705"
 
@@ -75,13 +76,18 @@ $CHOWN -R root.root $PACKAGE-$VERSION
 # Some extra folders
 PAKDIR=$PREFIX/packages
 if [ ! -d $PAKDIR ] ; then
-        $MKDIR $PAKDIR
+        $MKDIR -p $PAKDIR
 fi
 
 MODCOMPDIR=$SRCDIR/mods
 if [ ! -d $MODCOMPDIR ] ; then
-        $MKDIR $MODCOMPDIR
+        $MKDIR -p $MODCOMPDIR
 fi
+
+# CREATE CONFDIR
+#if [ ! -d $CONFDIR ] ; then
+#        $MKDIR -p $CONFDIR
+#fi
 
 # Compiler stuff
 MAKE=`which make`
@@ -185,10 +191,16 @@ if [ "$CLEAN" = "yes" ] ; then
         $MAKE clean
 fi
 
+# Create the raw installation directory structure to be able to link back (fishy)
+if [ -d $PREFIX ] ; then
+        $MKDIR -p $PREFIX
+fi
+
+
 # Translate the sources
 # -------------------------------------------------------------------------
 ./configure     --prefix=$PREFIX \
-        --bindir=/usr/bin \
+        --bindir=$BINDIR \
         --with-config-file-path=$PREFIX/etc \
         --with-config-file-scan-dir=$PREFIX/etc/conf.d/ \
         --with-pear=$PREFIX/pear \
@@ -257,9 +269,13 @@ if [ "$CHECK" = "no" ]; then
         echo "Installing sources to their destination"
 fi
 
+$MV $PREFIX $USRDIR/$PACKAGE-$VERSION
+$LN -s $USRDIR/$PACKAGE-$VERSION $PREFIX
+
 # Create some softlinks which can make lives easier
 # -------------------------------------------------------------------------
 $LN -s $PREFIX/etc $CONFDIR
+
 
 # Create some files and directories
 # -------------------------------------------------------------------------
@@ -301,45 +317,45 @@ cd $MODCOMPDIR
 
 # [MEMCACHE]
 if [ "$MEMCACHE" = "yes" ]; then
-#       $CHECKINSTALL -D --pkgname=$MEMCACHE_PKG_NAME --maintainer=$MAINTAINER --pakdir=$PAKDIR --delspec $PREFIX/bin/pecl install memcache
-        $PREFIX/bin/pecl install memcache
+#       $CHECKINSTALL -D --pkgname=$MEMCACHE_PKG_NAME --maintainer=$MAINTAINER --pakdir=$PAKDIR --delspec $BINDIR/pecl install memcache
+        $BINDIR/pecl install memcache
         echo "extension=memcache.so" > $CONFDIR/conf.d/memcache.ini
 fi
 
 # [MEMCACHED]
 if [ "$MEMCACHED" = "yes" ]; then
         $APTGET install -m -q -y libmemcached-dev
-        $PREFIX/bin/pecl install memcached
+        $BINDIR/pecl install memcached
         echo "extension=memcached.so" > $CONFDIR/conf.d/memcached.ini
 fi
 
 # [APC]
 if [ "$APC" = "yes" ] ; then
-        $PREFIX/bin/pecl install apc
+        $BINDIR/pecl install apc
         echo "extension=apc.so" > $CONFDIR/conf.d/apc.ini
 fi
 
 # [HTTP]
 if [ "$HTTP" = "yes" ] ; then
-        $PREFIX/bin/pecl install pecl_http
+        $BINDIR/pecl install pecl_http
         echo "extension=http.so" > $CONFDIR/conf.d/http.ini
 fi
 
 # [IMAGICK]
 if [ "$IMAGICK" = "yes" ] ; then
         $APTGET install -m -y -q libmagickwand-dev
-        $PREFIX/bin/pecl install imagick
+        $BINDIR/pecl install imagick
         echo "extension=imagick.so" > $CONFDIR/conf.d/imagick.ini
         $APTGET remove libmagickwand-dev
 fi
 
 # [JSON]
 if [ "$JSON" = "yes" ] ; then
-        $PREFIX/bin/pecl download json
+        $BINDIR/pecl download json
         $TAR json*.tar
         $RM -rf json*.tar
         cd json*
-        $PREFIX/bin/phpize
+        $BINDIR/phpize
         $CONFIGURE
         $MAKE
         $MAKE install
@@ -350,7 +366,7 @@ fi
 # [GEOIP]
 if [ "$GEOIP" = "yes" ] ; then
         $APTGET install -m -q -y libgeoip-dev
-        $PREFIX/bin/pecl install geoip
+        $BINDIR/pecl install geoip
         echo "extension=geoip.so" > $CONFDIR/conf.d/geoip.ini
         $APTGET remove libgeoip-dev
 fi
@@ -358,7 +374,7 @@ fi
 # [YAML]
 if [ "$YAML" = "yes" ] ; then
         $APTGET install -m -q -y libyaml-dev
-        $PREFIX/bin/pecl install yaml
+        $BINDIR/pecl install yaml
         echo "extension=yaml.so" > $CONFDIR/conf.d/yaml.ini
         $APTGET remove libyaml-dev
 fi
@@ -366,11 +382,11 @@ fi
 # [TIDY]
 if [ "$TIDY" = "yes" ] ; then
         $APTGET install -m -q -y libtidy-dev
-        $PREFIX/bin/pecl download tidy
+        $BINDIR/pecl download tidy
         $TAR xvf tidy*.tar
         $RM -rf tidy*.tar
         cd tidy*
-        $PREFIX/bin/phpize
+        $BINDIR/phpize
         $CONFIGURE
         $MAKE
         $MAKE install
@@ -386,7 +402,7 @@ if [ "$SUHOSIN" = "yes" ] ; then
         $TAR xvf suhosin*.tgz
         $RM -rf suhosin*.tgz
         cd suhosin*
-        $PREFIX/bin/phpize
+        $BINDIR/phpize
         $CONFIGURE
         $MAKE
         $MAKE install
@@ -397,19 +413,19 @@ fi
 
 # [XDEBUG]
 if [ "$XDEBUG" = "yes" ] ; then
-        $PREFIX/bin/pecl install xdebug
+        $BINDIR/pecl install xdebug
         echo ";zend_extension=/path/to/xdebug.so" > $CONFDIR/conf.d/xdebug.ini
 fi
 
 # [MEMTRACK]
 if [ "$MEMTRACK" = "yes" ] ; then
-        $PREFIX/bin/pecl install $MEMTRACK_CHANNEL
+        $BINDIR/pecl install $MEMTRACK_CHANNEL
         echo "extension=memtrack.so" > $CONFDIR/conf.d/memtrack.ini
 fi
 
 # [ZIP]
 if [ "$ZIP" = "yes" ] ; then
-        $PREFIX/bin/pecl install zip
+        $BINDIR/pecl install zip
         echo "extension=zip.so" > $CONFDIR/conf.d/zip.ini
 fi
 
@@ -423,11 +439,11 @@ if [ "$PDFLIB" = "yes" ] ; then
         $MAKE
         $MAKE install
         cd $MODCOMPDIR
-        $PREFIX/bin/pecl download pdflib
+        $BINDIR/pecl download pdflib
         $TAR xvf pdflib*.tar
         $RM -rf pdflib*.tar
         cd pdflib*
-        $PREFIX/bin/phpize
+        $BINDIR/phpize
         $CONFIGURE --with-pdflib=/usr/local/pdflib
         $MAKE
         $MAKE install
@@ -438,8 +454,8 @@ if [ "$PDFLIB" = "yes" ] ; then
 fi
 
 # Clean the mods dir
-cd $SRCDIR
-$RM -rf mods
+# cd $SRCDIR
+# $RM -rf mods
 
 # remove stuff no longer in use
 # $APTGET remove checkinstall libbz2-dev libcurl4-openssl-dev libcurl3 libjpeg62-dev libfreetype6-dev
