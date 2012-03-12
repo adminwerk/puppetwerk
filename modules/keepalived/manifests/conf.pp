@@ -27,6 +27,7 @@ define keepalived::conf (
 		$notification_email_from,
 		$smtp_server,
 		$smtp_connect_timeout,
+		$unique_id,
 		$state,
 		$priority,
 		$auth_pass,
