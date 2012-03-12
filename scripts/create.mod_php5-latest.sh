@@ -49,9 +49,7 @@ SRCTARGET=$SRCDIR$PACKAGE-$VERSION
 # Configure parameters set during translation of the package
 CONFDIR=/etc/php5
 BINDR=/usr/bin
-LOGDIR=/var/log/php5-fpm
-WWWUSER=www-data
-WWWGROUP=www-data
+LOGDIR=/var/log/php5
 SOCKETDIR=/var/lib/php5/sockets/
 
 # Binaries needed during this process
@@ -280,7 +278,7 @@ $LN -s $USRDIR/$PACKAGE-$VERSION $PREFIX
 # Create some softlinks which can make lives easier
 # -------------------------------------------------------------------------
 $LN -s $PREFIX/etc $CONFDIR
-
+$MKDIR $CONFDIR/conf.d
 
 # Create some files and directories
 # -------------------------------------------------------------------------
