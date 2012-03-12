@@ -106,75 +106,75 @@ CLEAN="no"
 # -------------------------------------------------------------------------
 
 # [yes/no] to install memcache.so
-MEMCACHE="yes"
-MEMCACHE_SUMMARY="memcache extension module for PHP5"
-MEMCACHE_PKG_NAME="php5-memcache"
+# MEMCACHE="yes"
+# MEMCACHE_SUMMARY="memcache extension module for PHP5"
+# MEMCACHE_PKG_NAME="php5-memcache"
 
-# [yes/no] to install memcached.so
-MEMCACHED="no"
-MEMCACHED_SUMMARY="memcached extension module for PHP5"
-MEMCACHED_PKG_NAME="php5-memcached"
+# # [yes/no] to install memcached.so
+# MEMCACHED="no"
+# MEMCACHED_SUMMARY="memcached extension module for PHP5"
+# MEMCACHED_PKG_NAME="php5-memcached"
 
-# [yes/no] to install apc.so
-APC="yes"
-APC_SUMMARY="apc caching extension module php5"
-APC_PKG_NAME="php5-apc"
+# # [yes/no] to install apc.so
+# APC="yes"
+# APC_SUMMARY="apc caching extension module php5"
+# APC_PKG_NAME="php5-apc"
 
-# [yes/no] to install pecl_http
-HTTP="no"
-HTTP_SUMMARY="http module extension for php5"
-HTTP_PKG_NAME="php5-http"
+# # [yes/no] to install pecl_http
+# HTTP="no"
+# HTTP_SUMMARY="http module extension for php5"
+# HTTP_PKG_NAME="php5-http"
 
-# [yes/no] to install json
-JSON="yes"
-JSON_SUMMARY="json module extension for php5"
-JSON_PKG_NAME="php5-json"
+# # [yes/no] to install json
+# JSON="yes"
+# JSON_SUMMARY="json module extension for php5"
+# JSON_PKG_NAME="php5-json"
 
-# [yes/no] to install geoip
-GEOIP="yes"
-GEOIP_SUMMARY="geoip module extension for php5"
-GEOIP_PKG_NAME="php5-geoip"
+# # [yes/no] to install geoip
+# GEOIP="yes"
+# GEOIP_SUMMARY="geoip module extension for php5"
+# GEOIP_PKG_NAME="php5-geoip"
 
-# [yes/no] to install imagick
-IMAGICK="yes"
-IMAGICK_SUMMARY="imagick module extension for php5"
-IMAGICK_PKG_NAME="php5-imagick"
+# # [yes/no] to install imagick
+# IMAGICK="yes"
+# IMAGICK_SUMMARY="imagick module extension for php5"
+# IMAGICK_PKG_NAME="php5-imagick"
 
-# [yes/no] to install yaml
-YAML="yes"
-YAML_SUMMARY="yaml module extension for php5"
-YAML_PKG_NAME="php5-yaml"
+# # [yes/no] to install yaml
+# YAML="yes"
+# YAML_SUMMARY="yaml module extension for php5"
+# YAML_PKG_NAME="php5-yaml"
 
-# [yes/no] to install tidy
-TIDY="yes"
-TIDY_SUMMARY="tidy module extension for php5"
-TIDY_PKG_NAME="php5-tidy"
+# # [yes/no] to install tidy
+# TIDY="yes"
+# TIDY_SUMMARY="tidy module extension for php5"
+# TIDY_PKG_NAME="php5-tidy"
 
-# [yes/no] to install suhosin
-SUHOSIN="yes"
-SUHOSIN_SUMMARY="advanced protection extension module for php5"
-SUHOSIN_PKG_NAME="php5-suhosin"
+# # [yes/no] to install suhosin
+# SUHOSIN="yes"
+# SUHOSIN_SUMMARY="advanced protection extension module for php5"
+# SUHOSIN_PKG_NAME="php5-suhosin"
 
-# [yes/no] to install memtrack
-MEMTRACK="yes"
-MEMTRACK_SUMMARY="memtrack extension module for php5 to watch (unusually high) memory consumption in PHP scripts"
-MEMTRACK_PKG_NAME="php5-memtrack"
-MEMTRACK_CHANNEL="channel://pecl.php.net/memtrack-$MEMTRACK_V"
+# # [yes/no] to install memtrack
+# MEMTRACK="yes"
+# MEMTRACK_SUMMARY="memtrack extension module for php5 to watch (unusually high) memory consumption in PHP scripts"
+# MEMTRACK_PKG_NAME="php5-memtrack"
+# MEMTRACK_CHANNEL="channel://pecl.php.net/memtrack-$MEMTRACK_V"
 
-# [yes/no] to install xdebug
-XDEBUG="yes"
-XDEBUG_SUMMARY="xdebug extension module for php5"
-XDEBUG_PKG_NAME="php5-xdebug"
+# # [yes/no] to install xdebug
+# XDEBUG="yes"
+# XDEBUG_SUMMARY="xdebug extension module for php5"
+# XDEBUG_PKG_NAME="php5-xdebug"
 
-# [yes/no] to install zip
-ZIP="yes"
-ZIP_SUMMARY="zip management extension module for php5"
-ZIP_PKG_NAME="php5-zip"
+# # [yes/no] to install zip
+# ZIP="yes"
+# ZIP_SUMMARY="zip management extension module for php5"
+# ZIP_PKG_NAME="php5-zip"
 
-# [yes/no] to install pdf
-PDFLIB="yes"
-PDFLIB_SUMMARY="pdflib support extension module for php5"
-PDFLIB_PKG_NAME="php5-pdf"
+# # [yes/no] to install pdf
+# PDFLIB="yes"
+# PDFLIB_SUMMARY="pdflib support extension module for php5"
+# PDFLIB_PKG_NAME="php5-pdf"
 
 # Change to where we start the compiling process
 cd $SRCTARGET
@@ -267,194 +267,164 @@ if [ "$CHECK" = "yes" ] ; then
         echo "creating DEB package 'mod-php5-apache2.2' and install it"
 fi
 
-if [ "$CHECK" = "no" ]; then
-        $MAKE install
-        echo "Installing sources to their destination"
-fi
-
-$MV $PREFIX $USRDIR/$PACKAGE-$VERSION
-$LN -s $USRDIR/$PACKAGE-$VERSION $PREFIX
-
-# Create some softlinks which can make lives easier
-# -------------------------------------------------------------------------
-$LN -s $PREFIX/etc $CONFDIR
-$MKDIR $PREFIX/etc/conf.d
-
-# Create some files and directories
-# -------------------------------------------------------------------------
-if [ ! -d $CONFDIR/conf.d ] ; then
-        $MKDIR -p $CONFDIR/conf.d
-        echo "extension=bz2.so" > $CONFDIR/conf.d/bz2.ini
-        echo "extension=curl.so" > $CONFDIR/conf.d/curl.ini
-        echo "extension=dba.so" > $CONFDIR/conf.d/dba.ini
-        echo "extension=dbase.so" > $CONFDIR/conf.d/dbase.ini
-        echo "extension=ftp.so" > $CONFDIR/conf.d/ftp.ini
-        echo "extension=gd.so" > $CONFDIR/conf.d/gd.ini
-        echo "extension=imap.so" > $CONFDIR/conf.d/imap.ini
-        echo "extension=ldap.so" > $CONFDIR/conf.d/ldap.ini
-        echo "extension=mcrypt.so" > $CONFDIR/conf.d/mcrypt.ini
-        echo "extension=openssl.so" > $CONFDIR/conf.d/openssl.ini
-        echo "extension=soap.so" > $CONFDIR/conf.d/soap.ini
-        echo "extension=sqlite.so" > $CONFDIR/conf.d/sqlite.ini
-        echo "extension=xsl.so" > $CONFDIR/conf.d/xsl.ini
-        echo "extension=zlib.so" > $CONFDIR/conf.d/zlib.ini
-fi
-
-# Create the directory where the sockets are stored (if it dosn't already exists)
-# -------------------------------------------------------------------------
-if [ ! -d $SOCKETDIR ] ; then
-        $MKDIR -p $SOCKETDIR
-fi
-
-# Create or make files to configurations
-# -------------------------------------------------------------------------
-$CP $SRCTARGET/php.ini-development $CONFDIR/php.ini-development
-$CP $SRCTARGET/php.ini-production $CONFDIR/php.ini
 
 
-# Install PECL packages
-# -------------------------------------------------------------------------
-# Jump back out of the php into the src directory
-cd $MODCOMPDIR
+
+# # Create the directory where the sockets are stored (if it dosn't already exists)
+# # -------------------------------------------------------------------------
+# if [ ! -d $SOCKETDIR ] ; then
+#         $MKDIR -p $SOCKETDIR
+# fi
+
+# # Create or make files to configurations
+# # -------------------------------------------------------------------------
+# $CP $SRCTARGET/php.ini-development $CONFDIR/php.ini-development
+# $CP $SRCTARGET/php.ini-production $CONFDIR/php.ini
 
 
-# [MEMCACHE]
-if [ "$MEMCACHE" = "yes" ]; then
-#       $CHECKINSTALL -D --pkgname=$MEMCACHE_PKG_NAME --maintainer=$MAINTAINER --pakdir=$PAKDIR --delspec $BINDIR/pecl install memcache
-        $BINDIR/pecl install memcache
-        echo "extension=memcache.so" > $CONFDIR/conf.d/memcache.ini
-fi
+# # Install PECL packages
+# # -------------------------------------------------------------------------
+# # Jump back out of the php into the src directory
+# cd $MODCOMPDIR
 
-# [MEMCACHED]
-if [ "$MEMCACHED" = "yes" ]; then
-        $APTGET install -m -q -y libmemcached-dev
-        $BINDIR/pecl install memcached
-        echo "extension=memcached.so" > $CONFDIR/conf.d/memcached.ini
-fi
 
-# [APC]
-if [ "$APC" = "yes" ] ; then
-        $BINDIR/pecl install apc
-        echo "extension=apc.so" > $CONFDIR/conf.d/apc.ini
-fi
+# # [MEMCACHE]
+# if [ "$MEMCACHE" = "yes" ]; then
+# #       $CHECKINSTALL -D --pkgname=$MEMCACHE_PKG_NAME --maintainer=$MAINTAINER --pakdir=$PAKDIR --delspec $BINDIR/pecl install memcache
+#         $BINDIR/pecl install memcache
+#         echo "extension=memcache.so" > $CONFDIR/conf.d/memcache.ini
+# fi
 
-# [HTTP]
-if [ "$HTTP" = "yes" ] ; then
-        $BINDIR/pecl install pecl_http
-        echo "extension=http.so" > $CONFDIR/conf.d/http.ini
-fi
+# # [MEMCACHED]
+# if [ "$MEMCACHED" = "yes" ]; then
+#         $APTGET install -m -q -y libmemcached-dev
+#         $BINDIR/pecl install memcached
+#         echo "extension=memcached.so" > $CONFDIR/conf.d/memcached.ini
+# fi
 
-# [IMAGICK]
-if [ "$IMAGICK" = "yes" ] ; then
-        $APTGET install -m -y -q libmagickwand-dev
-        $BINDIR/pecl install imagick
-        echo "extension=imagick.so" > $CONFDIR/conf.d/imagick.ini
-        $APTGET remove libmagickwand-dev
-fi
+# # [APC]
+# if [ "$APC" = "yes" ] ; then
+#         $BINDIR/pecl install apc
+#         echo "extension=apc.so" > $CONFDIR/conf.d/apc.ini
+# fi
 
-# [JSON]
-if [ "$JSON" = "yes" ] ; then
-        $BINDIR/pecl download json
-        $TAR json*.tar
-        $RM -rf json*.tar
-        cd json*
-        $BINDIR/phpize
-        $CONFIGURE
-        $MAKE
-        $MAKE install
-        echo "extension=json.so" > $CONFDIR/conf.d/json.ini
-        cd $MODCOMPDIR
-fi
+# # [HTTP]
+# if [ "$HTTP" = "yes" ] ; then
+#         $BINDIR/pecl install pecl_http
+#         echo "extension=http.so" > $CONFDIR/conf.d/http.ini
+# fi
 
-# [GEOIP]
-if [ "$GEOIP" = "yes" ] ; then
-        $APTGET install -m -q -y libgeoip-dev
-        $BINDIR/pecl install geoip
-        echo "extension=geoip.so" > $CONFDIR/conf.d/geoip.ini
-        $APTGET remove libgeoip-dev
-fi
+# # [IMAGICK]
+# if [ "$IMAGICK" = "yes" ] ; then
+#         $APTGET install -m -y -q libmagickwand-dev
+#         $BINDIR/pecl install imagick
+#         echo "extension=imagick.so" > $CONFDIR/conf.d/imagick.ini
+#         $APTGET remove libmagickwand-dev
+# fi
 
-# [YAML]
-if [ "$YAML" = "yes" ] ; then
-        $APTGET install -m -q -y libyaml-dev
-        $BINDIR/pecl install yaml
-        echo "extension=yaml.so" > $CONFDIR/conf.d/yaml.ini
-        $APTGET remove libyaml-dev
-fi
+# # [JSON]
+# if [ "$JSON" = "yes" ] ; then
+#         $BINDIR/pecl download json
+#         $TAR json*.tar
+#         $RM -rf json*.tar
+#         cd json*
+#         $BINDIR/phpize
+#         $CONFIGURE
+#         $MAKE
+#         $MAKE install
+#         echo "extension=json.so" > $CONFDIR/conf.d/json.ini
+#         cd $MODCOMPDIR
+# fi
 
-# [TIDY]
-if [ "$TIDY" = "yes" ] ; then
-        $APTGET install -m -q -y libtidy-dev
-        $BINDIR/pecl download tidy
-        $TAR xvf tidy*.tar
-        $RM -rf tidy*.tar
-        cd tidy*
-        $BINDIR/phpize
-        $CONFIGURE
-        $MAKE
-        $MAKE install
-        echo "extension=tidy.so" > $CONFDIR/conf.d/tidy.ini
-        cd $MODCOMPDIR
-        $RM -rf tidy*
-        $APTGET remove libtidy-dev
-fi
+# # [GEOIP]
+# if [ "$GEOIP" = "yes" ] ; then
+#         $APTGET install -m -q -y libgeoip-dev
+#         $BINDIR/pecl install geoip
+#         echo "extension=geoip.so" > $CONFDIR/conf.d/geoip.ini
+#         $APTGET remove libgeoip-dev
+# fi
 
-# [SUHOSIN]
-if [ "$SUHOSIN" = "yes" ] ; then
-        $WGET http://download.suhosin.org/suhosin-$SUHOSIN_V.tgz
-        $TAR xvf suhosin*.tgz
-        $RM -rf suhosin*.tgz
-        cd suhosin*
-        $BINDIR/phpize
-        $CONFIGURE
-        $MAKE
-        $MAKE install
-        echo "extension=suhosin.so" > $CONFDIR/conf.d/suhosin.ini
-        cd $MODCOMPDIR
-        $RM -rf suhosin*
-fi
+# # [YAML]
+# if [ "$YAML" = "yes" ] ; then
+#         $APTGET install -m -q -y libyaml-dev
+#         $BINDIR/pecl install yaml
+#         echo "extension=yaml.so" > $CONFDIR/conf.d/yaml.ini
+#         $APTGET remove libyaml-dev
+# fi
 
-# [XDEBUG]
-if [ "$XDEBUG" = "yes" ] ; then
-        $BINDIR/pecl install xdebug
-        echo ";zend_extension=/path/to/xdebug.so" > $CONFDIR/conf.d/xdebug.ini
-fi
+# # [TIDY]
+# if [ "$TIDY" = "yes" ] ; then
+#         $APTGET install -m -q -y libtidy-dev
+#         $BINDIR/pecl download tidy
+#         $TAR xvf tidy*.tar
+#         $RM -rf tidy*.tar
+#         cd tidy*
+#         $BINDIR/phpize
+#         $CONFIGURE
+#         $MAKE
+#         $MAKE install
+#         echo "extension=tidy.so" > $CONFDIR/conf.d/tidy.ini
+#         cd $MODCOMPDIR
+#         $RM -rf tidy*
+#         $APTGET remove libtidy-dev
+# fi
 
-# [MEMTRACK]
-if [ "$MEMTRACK" = "yes" ] ; then
-        $BINDIR/pecl install $MEMTRACK_CHANNEL
-        echo "extension=memtrack.so" > $CONFDIR/conf.d/memtrack.ini
-fi
+# # [SUHOSIN]
+# if [ "$SUHOSIN" = "yes" ] ; then
+#         $WGET http://download.suhosin.org/suhosin-$SUHOSIN_V.tgz
+#         $TAR xvf suhosin*.tgz
+#         $RM -rf suhosin*.tgz
+#         cd suhosin*
+#         $BINDIR/phpize
+#         $CONFIGURE
+#         $MAKE
+#         $MAKE install
+#         echo "extension=suhosin.so" > $CONFDIR/conf.d/suhosin.ini
+#         cd $MODCOMPDIR
+#         $RM -rf suhosin*
+# fi
 
-# [ZIP]
-if [ "$ZIP" = "yes" ] ; then
-        $BINDIR/pecl install zip
-        echo "extension=zip.so" > $CONFDIR/conf.d/zip.ini
-fi
+# # [XDEBUG]
+# if [ "$XDEBUG" = "yes" ] ; then
+#         $BINDIR/pecl install xdebug
+#         echo ";zend_extension=/path/to/xdebug.so" > $CONFDIR/conf.d/xdebug.ini
+# fi
 
-# [PDFLIB]
-if [ "$PDFLIB" = "yes" ] ; then
-        $WGET http://www.pdflib.com/binaries/PDFlib/$PDFLIB_RDIR/PDFlib-Lite-$PDFLIB_V.tar.gz
-        $TAR xvf PDFlib*.tar.gz
-        $RM -rf PDFlib*.tar.gz
-        cd PDFlib*
-        $CONFIGURE --prefix=/usr/local/pdflib
-        $MAKE
-        $MAKE install
-        cd $MODCOMPDIR
-        $BINDIR/pecl download pdflib
-        $TAR xvf pdflib*.tar
-        $RM -rf pdflib*.tar
-        cd pdflib*
-        $BINDIR/phpize
-        $CONFIGURE --with-pdflib=/usr/local/pdflib
-        $MAKE
-        $MAKE install
-        echo "extension=pdflib.so" > $CONFDIR/conf.d/pdflib.ini
-        cd $MODCOMPDIR
-        $RM -rf pdflib*
-        $RM -rf PDFlib-Lite*
-fi
+# # [MEMTRACK]
+# if [ "$MEMTRACK" = "yes" ] ; then
+#         $BINDIR/pecl install $MEMTRACK_CHANNEL
+#         echo "extension=memtrack.so" > $CONFDIR/conf.d/memtrack.ini
+# fi
+
+# # [ZIP]
+# if [ "$ZIP" = "yes" ] ; then
+#         $BINDIR/pecl install zip
+#         echo "extension=zip.so" > $CONFDIR/conf.d/zip.ini
+# fi
+
+# # [PDFLIB]
+# if [ "$PDFLIB" = "yes" ] ; then
+#         $WGET http://www.pdflib.com/binaries/PDFlib/$PDFLIB_RDIR/PDFlib-Lite-$PDFLIB_V.tar.gz
+#         $TAR xvf PDFlib*.tar.gz
+#         $RM -rf PDFlib*.tar.gz
+#         cd PDFlib*
+#         $CONFIGURE --prefix=/usr/local/pdflib
+#         $MAKE
+#         $MAKE install
+#         cd $MODCOMPDIR
+#         $BINDIR/pecl download pdflib
+#         $TAR xvf pdflib*.tar
+#         $RM -rf pdflib*.tar
+#         cd pdflib*
+#         $BINDIR/phpize
+#         $CONFIGURE --with-pdflib=/usr/local/pdflib
+#         $MAKE
+#         $MAKE install
+#         echo "extension=pdflib.so" > $CONFDIR/conf.d/pdflib.ini
+#         cd $MODCOMPDIR
+#         $RM -rf pdflib*
+#         $RM -rf PDFlib-Lite*
+# fi
 
 # Clean the mods dir
 # cd $SRCDIR
