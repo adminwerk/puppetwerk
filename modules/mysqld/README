@@ -1,8 +1,0 @@
-==MYSQLD-CLUSTER (GPL)
-
-=== Preparing
-init.pp
-
-
-=== Setup
-server.pp
