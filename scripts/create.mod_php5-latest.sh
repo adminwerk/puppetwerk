@@ -206,6 +206,7 @@ fi
         --with-config-file-path=$PREFIX/etc \
         --with-config-file-scan-dir=$PREFIX/etc/conf.d/ \
         --with-pear=$PREFIX/pear \
+        --with-libdir=/usr/lib64 \
         --with-apxs2=$APXS2 \
         --enable-bcmath \
         --enable-calendar \
