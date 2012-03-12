@@ -201,12 +201,13 @@ fi
 
 # Translate the sources
 # -------------------------------------------------------------------------
-./configure     --prefix=$PREFIX \
+./configure --prefix=$PREFIX \
         --bindir=$BINDIR \
         --with-config-file-path=$PREFIX/etc \
         --with-config-file-scan-dir=$PREFIX/etc/conf.d/ \
         --with-pear=$PREFIX/pear \
         --with-apxs2=$APXS2 \
+        --with-libdir=lib64 \
         --enable-bcmath \
         --enable-calendar \
         --enable-dba=shared \
