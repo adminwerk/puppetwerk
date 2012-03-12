@@ -65,6 +65,7 @@ TAR=`which tar`
 CHMOD=`which chmod`
 CHOWN=`which chown`
 RM=`which rm`
+APXS2=`which apxs2`
 
 # Download and preparation
 DLK=http://de.php.net/get/php-$VERSION.tar.gz/from/this/mirror
@@ -205,7 +206,7 @@ fi
         --with-config-file-path=$PREFIX/etc \
         --with-config-file-scan-dir=$PREFIX/etc/conf.d/ \
         --with-pear=$PREFIX/pear \
-        --with-apxs2 \
+        --with-apxs2=$APXS2 \
         --enable-bcmath \
         --enable-calendar \
         --enable-dba=shared \
