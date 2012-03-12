@@ -233,8 +233,7 @@ fi
         --with-imap=shared \
         --with-imap-ssl=shared \
         --with-openssl=shared \
-        --with-kerberos=shared \
-        --with-kerberos-dir=/usr/lib/mit-krb5/ \‚
+        --with-kerberos=shared,/usr/lib64/krb5/ \‚
         --with-zlib=shared \
         --with-ldap=shared \
         --with-bz2=shared \
