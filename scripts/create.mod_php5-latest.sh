@@ -232,7 +232,7 @@ fi
         --with-imap=shared \
         --with-imap-ssl=shared \
         --with-openssl=shared \
-        --with-kerberos=shared,/usr/lib \
+        --with-kerberos \
         --with-zlib=shared \
         --with-ldap=shared \
         --with-bz2=shared \
@@ -278,7 +278,7 @@ $LN -s $USRDIR/$PACKAGE-$VERSION $PREFIX
 # Create some softlinks which can make lives easier
 # -------------------------------------------------------------------------
 $LN -s $PREFIX/etc $CONFDIR
-$MKDIR $CONFDIR/conf.d
+$MKDIR $PREFIX/etc/conf.d
 
 # Create some files and directories
 # -------------------------------------------------------------------------
