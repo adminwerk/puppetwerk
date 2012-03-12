@@ -207,7 +207,6 @@ fi
         --with-config-file-scan-dir=$PREFIX/etc/conf.d/ \
         --with-pear=$PREFIX/pear \
         --with-apxs2=$APXS2 \
-        --with-libdir=lib64 \
         --enable-bcmath \
         --enable-calendar \
         --enable-dba=shared \
@@ -234,7 +233,7 @@ fi
         --with-imap=shared \
         --with-imap-ssl=shared \
         --with-openssl=shared \
-        --with-kerberos=shared \
+        --with-kerberos=shared,/usr/lib/ \
         --with-zlib=shared \
         --with-ldap=shared \
         --with-bz2=shared \
