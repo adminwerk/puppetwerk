@@ -181,7 +181,8 @@ cd $SRCTARGET
 
 # Dependencies, conf and compiler needed
 # -------------------------------------------------------------------------
-$APTGET -m -q -y install apache2-threaded-dev libc-client2007e-dev libkrb5-dev krb5-config
+$APTGET -m -q -y install apache2-threaded-dev libc-client2007e-dev libkrb5-dev krb5-config postgresql-server-dev-8.4
+$APTGET -m -q -y install libreadline5-dev
 $APTGET -m -q -y install checkinstall libbz2-dev libcurl4-openssl-dev libcurl3 libjpeg62-dev libfreetype6-dev
 $APTGET -m -q -y install comerr-dev krb5-multidev libgssrpc4 libidn11-dev libkadm5clnt-mit7 libt1-dev libxslt1-dev
 $APTGET -m -q -y install libkadm5srv-mit7 libkdb5-4 libkrb5-dev pkg-config libpng12-dev libxpm-dev libxslt1.1
@@ -206,7 +207,7 @@ fi
         --with-config-file-path=$PREFIX/etc \
         --with-config-file-scan-dir=$PREFIX/etc/conf.d/ \
         --with-pear=$PREFIX/pear \
-        --with-libdir=lib64 \
+        --with-libdir=/usr/lib \
         --with-apxs2=$APXS2 \
         --enable-bcmath \
         --enable-calendar \
@@ -257,6 +258,8 @@ fi
         --with-mysql=mysqlnd \
         --with-mysqli=mysqlnd \
         --with-pdo-mysql=mysqlnd \
+        --with-pgsql=shared \
+        --with-readline=shared \
         --with-xsl=shared \
 
 # Compile and install
