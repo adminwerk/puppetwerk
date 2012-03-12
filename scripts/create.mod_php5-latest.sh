@@ -263,7 +263,7 @@ fi
 $MAKE
 
 if [ "$CHECK" = "yes" ] ; then
-        $CHECKINSTALL -D --pkgname="mod-php5-apache2.2" --pakdir=$PAKDIR --maintainer=$MAINTAINER --delspec "$MAKE install"
+        $CHECKINSTALL -D --pkgname="mod-php5-apache2.2" --pakdir=$PAKDIR --maintainer=$MAINTAINER --delspec $MAKE install
         echo "creating DEB package 'mod-php5-apache2.2' and install it"
 fi
 
