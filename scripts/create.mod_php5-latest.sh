@@ -180,6 +180,7 @@ cd $SRCTARGET
 
 # Dependencies, conf and compiler needed
 # -------------------------------------------------------------------------
+$APTGET -m -q -y install apache2-threaded-dev
 $APTGET -m -q -y install checkinstall libbz2-dev libcurl4-openssl-dev libcurl3 libjpeg62-dev libfreetype6-dev
 $APTGET -m -q -y install comerr-dev krb5-multidev libgssrpc4 libidn11-dev libkadm5clnt-mit7 libt1-dev libxslt1-dev
 $APTGET -m -q -y install libkadm5srv-mit7 libkdb5-4 libkrb5-dev pkg-config libpng12-dev libxpm-dev libxslt1.1
