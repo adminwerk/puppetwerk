@@ -209,7 +209,7 @@ fi
         --enable-bcmath \
         --enable-calendar \
         --enable-dba=shared \
-        --enable-dbase=shared \
+        --enable-dbase \
         --enable-exif=shared \
         --enable-ftp=shared \
         --enable-soap=shared \
@@ -239,7 +239,7 @@ fi
         --with-curl=shared \
         --with-curlwrappers=shared \
         --with-gd=shared \
-        --with-ttf=shared \
+        --with-ttf \
         --with-jpeg-dir=/usr/lib \
         --with-png-dir=/usr/lib \
         --with-sqlite=shared \
