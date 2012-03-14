@@ -1,6 +1,19 @@
-Inside this directory a node folder including all the "nodes/*.pp" files is required to make it work. It might contain sensible data, hence not included in this git repository.
+# Manifest directory
 
-A typical node looks like this:
+This folder is the defined starting point for the puppet infrastructure. Set in puppet.conf via the
+manifestdir option. First file called is the site.pp
+
+## site.pp
+
+The initial manifest has to spread word about everything else, which happens with the 'import' command.
+Imported are some general classes and the nodes definitions.
+
+import "classes/*.pp"
+import "nodes/*.pp"
+
+This option offers a good flexibility to handle each node in one file. The chosen naming convention
+for nodes is simply hostname.pp. The nodes folder may contain relevant security informations. Therefor
+it is not part of the repository. But it exists. A typical node looks like this:
 
 node "server.domain.tld" {
 
@@ -11,3 +24,4 @@ node "server.domain.tld" {
 		class2,
 		class...,
 }
+
