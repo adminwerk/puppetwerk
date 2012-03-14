@@ -1,0 +1,8 @@
+# MAINTAINED BY PUPPET
+
+[ssh]
+enabled = <%= f2b_ssh_enabled %>
+port = <%= f2b_ssh_port %>
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = <%= f2b_ssh_max_retry %>
