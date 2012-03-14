@@ -72,16 +72,14 @@ class user::virtual {
 		password => "${cmr_hashed_passwd}",
 	}
 
-	# special users which are there to establish a persistent tunnel between servers
-	@ssh_user { "tunnel-ws01": 
-		key => "${tunnel_pub_key}",
-		fullname => "${tunnel_full}",
-		password => "${tunnel_hashed_passwd}",
-	}
+	# Special users which are establishing a persistent tunnel between servers.
+	# For now all of them use the same infrastructure but different names to distinguish
+	# them and their configuration.
 
-	@ssh_user { "tunnel-db01": 
+	@ssh_user { "tunnel": 
 		key => "${tunnel_pub_key}",
 		fullname => "${tunnel_full}",
+		ingroups => ["admin"],
 		password => "${tunnel_hashed_passwd}",
 	}
 
