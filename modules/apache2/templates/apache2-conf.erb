@@ -1,0 +1,117 @@
+
+### Section 1: Global Environment
+#
+# The directives in this section affect the overall operation of Apache,
+# such as the number of concurrent requests it can handle or where it
+# can find its configuration files.
+#
+
+ServerRoot "/etc/apache2"
+
+#<IfModule !mpm_winnt.c>
+#<IfModule !mpm_netware.c>
+LockFile /var/lock/apache2/accept.lock
+#</IfModule>
+#</IfModule>
+
+PidFile ${APACHE_PID_FILE}
+
+Timeout 300
+
+KeepAlive On
+MaxKeepAliveRequests 100
+KeepAliveTimeout 15
+
+##
+## Server-Pool Size Regulation (MPM specific)
+## 
+
+# prefork MPM
+# StartServers: number of server processes to start
+# MinSpareServers: minimum number of server processes which are kept spare
+# MaxSpareServers: maximum number of server processes which are kept spare
+# MaxClients: maximum number of server processes allowed to start
+# MaxRequestsPerChild: maximum number of requests a server process serves
+<IfModule mpm_prefork_module>
+    StartServers          5
+    MinSpareServers       5
+    MaxSpareServers      10
+    MaxClients          150
+    MaxRequestsPerChild   0
+</IfModule>
+
+# worker MPM
+# StartServers: initial number of server processes to start
+# MaxClients: maximum number of simultaneous client connections
+# MinSpareThreads: minimum number of worker threads which are kept spare
+# MaxSpareThreads: maximum number of worker threads which are kept spare
+# ThreadsPerChild: constant number of worker threads in each server process
+# MaxRequestsPerChild: maximum number of requests a server process serves
+<IfModule mpm_worker_module>
+    StartServers          2
+    MinSpareThreads      25
+    MaxSpareThreads      75 
+    ThreadLimit          64
+    ThreadsPerChild      25
+    MaxClients          150
+    MaxRequestsPerChild   0
+</IfModule>
+
+# event MPM
+# StartServers: initial number of server processes to start
+# MaxClients: maximum number of simultaneous client connections
+# MinSpareThreads: minimum number of worker threads which are kept spare
+# MaxSpareThreads: maximum number of worker threads which are kept spare
+# ThreadsPerChild: constant number of worker threads in each server process
+# MaxRequestsPerChild: maximum number of requests a server process serves
+<IfModule mpm_event_module>
+    StartServers          2
+    MaxClients          150
+    MinSpareThreads      25
+    MaxSpareThreads      75 
+    ThreadLimit          64
+    ThreadsPerChild      25
+    MaxRequestsPerChild   0
+</IfModule>
+
+# These need to be set in /etc/apache2/envvars
+User ${APACHE_RUN_USER}
+Group ${APACHE_RUN_GROUP}
+
+AccessFileName .htaccess
+<Files ~ "^\.ht">
+    Order allow,deny
+    Deny from all
+    Satisfy all
+</Files>
+
+DefaultType text/plain
+HostnameLookups Off
+
+ErrorLog /var/log/apache2/error.log
+
+LogLevel warn
+
+# Include module configuration:
+Include /etc/apache2/mods-enabled/*.load
+Include /etc/apache2/mods-enabled/*.conf
+
+# Include all the user configurations:
+Include /etc/apache2/httpd.conf
+
+# Include ports listing
+Include /etc/apache2/ports.conf
+
+LogFormat "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" vhost_combined
+LogFormat "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" combined
+LogFormat "%h %l %u %t \"%r\" %>s %O" common
+LogFormat "%{Referer}i -> %U" referer
+LogFormat "%{User-agent}i" agent
+
+CustomLog /var/log/apache2/other_vhosts_access.log vhost_combined
+
+# Include generic snippets of statements
+Include /etc/apache2/conf.d/
+
+# Include the virtual host configurations:
+Include /etc/apache2/sites-enabled/

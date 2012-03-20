@@ -1,0 +1,43 @@
+<IfModule mod_ssl.c>
+
+NameVirtualHost <%= vhost_ip %>:443
+<VirtualHost <%= vhost_ip %>:443>
+
+	ServerName www.<%= vhost_domain %>
+	<% if vhost_server_alias != '' %> ServerAlias <%= vhost_server_alias %> <% end -%>
+	UseCanonicalName Off
+
+	ServerAdmin <%= vhost_server_admin %>
+	DocumentRoot <%= vhost_root %>
+
+	# [logging]
+	ErrorLog /var/log/apache2/<%= vhost_domain %>_ssl-error.log
+	CustomLog /var/log/apache2/<%= vhost_domain %>_ssl-access.log combined
+
+    SSLEngine on
+    SSLVerifyClient none
+    SSLCertificateFile /etc/apache2/ssl/certificates/<%= ssl_cert %> #cert-ngAXQw
+    SSLCACertificateFile /etc/apache2/ssl/certificates/<%= ssl_ca_cert %> #cert-RpaAyt
+
+	<Directory />
+		Options FollowSymLinks
+		AllowOverride None
+	</Directory>
+
+    <Directory "/var/www/<%= vhost_domain %>">
+    	Options <%= vhost_domain_options %>
+		AllowOverride <%= vhost_domain_allow_override %>
+		Order <%= vhost_domain_order %>
+		Allow from all
+
+    	SSLRequireSSL
+    </Directory>
+
+	# open up the possibility to set some custom directives
+	Include "vhost-custom.d/<%= vhost_domain %>ssl-custom.conf"
+
+</VirtualHost>
+
+</IfModule>
+
+# (c) 2012 chris@adminwerk.de
