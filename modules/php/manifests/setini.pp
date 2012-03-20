@@ -13,7 +13,7 @@
 #
 # Sample Usage:
 #
-#		php::setini { "setup-php-ini":
+#	php::setini { "setup-php-ini":
 #		php_ini_safe_mode => "Off",
 #		php_ini_max_execution_time =>"600",
 #		php_ini_max_inout_time => "300",
