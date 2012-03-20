@@ -2,7 +2,20 @@
 # DO NOT TOUCH as this file might simply been overwritten at some point
 
 [mysqld]
-ndbcluster
-datadir=<%= datadir %>/mysqld_data
-basedir=<%= basedir %>
-port=<%= port %>
+local-infile=<%= mysql_cnf_local-infile %>
+datadir=<%= mysql_cnf_datadir %>
+socket=<%= mysql_cnf_socket %>
+old_passwords=<%= mysql_cnf_old_password %>
+max_connections=<%= mysql_cnf_max_connections %>
+max_allowed_packet=<%= mysql_cnf_max_allowed_packet %>
+log-slow-queries = <%= mysql_cnf_log-slow-queries %>
+
+[mysql.server]
+user=<%= mysql_cnf_user %>
+basedir=<%= mysql_cnf_basedir %>
+
+[mysqld_safe]
+log-error=<%= mysql_cnf_log-error %>
+pid-file=<%= mysql_cnf_pid-file %>	
+
+port=<%= mysql_cnf_port %>
