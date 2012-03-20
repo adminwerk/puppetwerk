@@ -34,7 +34,7 @@ define php::pecl::zendmodule ($state="stable", $auto_answer="\\n", $inst_path=''
 	file { "/etc/php5/conf.d/${name}.ini":
 		replace => false,
 		ensure => present,
-		content => "zend_extension=${$inst_path}${name}.so",
+		content => "zend_extension=${inst_path}/${name}.so",
 		mode => 644,
 		notify => Service['apache2'],
 	} # file	
