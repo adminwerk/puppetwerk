@@ -1,0 +1,29 @@
+{
+  "name": "puppetwerk-php5",
+  "author": "chris@adminwerk.de",
+  "description": "",
+  "license": "GPLv3",
+  "project_page": "",
+  "source": "",
+  "summary": "",
+  "version": "0.0.1",
+  "checksums": {
+    "Modulefile": "df306d0c998cab9fbd481e7b173ad287",
+    "README": "305be7fd903916f1f6b665030d69f9d7",
+    "lib/puppet/provider/package/pear.rb": "9ad56b12da8d9b57a1c7444d18c22209",
+    "lib/puppet/provider/package/pecl.rb": "41fca7fc29081de83643c62eb804958f",
+    "manifests/init.pp": "5f1f93e8aaedc248dde03edc1ec0a0a9",
+    "manifests/pear.pp": "2b13fc73164a40b81d9c9e962c6dcb59",
+    "manifests/pear/config.pp": "2df3a33e0602673ba8b34f4568d4fece",
+    "manifests/pecl.pp": "905ba9809c0a618877b0fc1e96eb1fbd",
+    "manifests/pecl/config.pp": "55036c09fdf181073f3edeb13434ecd0",
+    "manifests/pecl/module.pp": "3c83a26aefff12fa3d9ce41e2f0a0d70",
+    "manifests/pecl/zendmodule.pp": "c08829d181b47fea9a6088aa3d8162a8",
+    "manifests/setini.pp": "87231c1df1c63137abf737c29abf5c05",
+    "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+    "spec/spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
+    "templates/php_ini.erb": "acfd9678f0ef2627c880dd54c3215473",
+    "tests/init.pp": "c4b5f09b6bbefeaaef1bbff6a94c4c0a"
+  },
+  "dependencies": []
+}
