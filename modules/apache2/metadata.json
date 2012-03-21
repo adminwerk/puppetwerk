@@ -1,0 +1,32 @@
+{
+  "name": "puppetwerk-apache2",
+  "author": "chris@adminwerk.de",
+  "description": "-work in progress-",
+  "license": "GPL v3",
+  "project_page": "",
+  "source": "",
+  "summary": "Installs, configures and maintains Apache2",
+  "version": "0.0.1",
+  "checksums": {
+    "Modulefile": "35fef0764019b8cf4a5477507ccc75d3",
+    "README": "2a171f95b4f1463b55ece0f84e3247e0",
+    "README.md": "180031136ce91e69c00a09ed2393a73d",
+    "manifests/confsnippet.pp": "5f0fb3d106fb601168fd631d762c31b0",
+    "manifests/init.pp": "b308546a7b3073bb55a014e03e400088",
+    "manifests/module.pp": "6bde20149fb080b587955b42c4f83705",
+    "manifests/php.pp": "794fe412152edfdb25a19da39dbd5553",
+    "manifests/some.pp": "488b3d1620cdac4a6f17eb955e741f7c",
+    "manifests/vhost.pp": "931b216e4bf8790ca06c788449ff4bf4",
+    "manifests/vhostssl.pp": "1c0e50e65c484f9cf58e8db8ef93e885",
+    "spec/spec.opts": "a600ded995d948e393fbe2320ba8e51c",
+    "spec/spec_helper.rb": "ca19ec4f451ebc7fdb035b52eae6e909",
+    "templates/apache2-conf.erb": "8ce1721d46a0287918ea9729326856fa",
+    "templates/ports-conf.erb": "4cf0553d207144b9e34c00da00852ef9",
+    "templates/vhost-custom.erb": "3e9ec00a37a14e3f7dda5564972e3aba",
+    "templates/vhost.erb": "e37cd7c37cba808a878448025edca385",
+    "templates/vhostssl-custom.erb": "52f6a97257c7eb1ddb644b2ff0dbfb2d",
+    "templates/vhostssl.erb": "11679be393819da0f7b3af9b16058ed9",
+    "tests/init.pp": "17471b19829471c5ae6f11efdcd698d1"
+  },
+  "dependencies": []
+}

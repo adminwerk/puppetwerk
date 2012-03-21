@@ -1,0 +1,9 @@
+name 'puppetwerk-apache2'
+version '0.0.1'
+
+author 'chris@adminwerk.de'
+license 'GPL v3'
+project_page ''
+source ''
+summary 'Installs, configures and maintains Apache2'
+description '-work in progress-'
